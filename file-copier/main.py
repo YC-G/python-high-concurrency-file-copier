@@ -1,7 +1,6 @@
-import time
 import multiprocessing
 import os
-import shutil
+#import shutil
 
 
 def copy_file(file_name, source_dir, dest_dir):
@@ -9,7 +8,19 @@ def copy_file(file_name, source_dir, dest_dir):
     dest_path = dest_dir + "/" + file_name
     print(source_path, "-->", dest_path)
 
-    shutil.copyfile(source_path, dest_path)
+    # Copy jpg
+    #shutil.copyfile(source_path, dest_path)
+
+    # Copy file
+    with open(source_path, "rb") as source_file:
+        with open(dest_path, "wb") as dest_file:
+            while True:
+                data = source_file.read(1024)
+                if data:
+                    dest_file.write(data)
+                else:
+                    break
+
 
 if __name__ == '__main__':
     # Get current directory
